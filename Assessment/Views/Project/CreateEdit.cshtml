@@ -1,0 +1,63 @@
+﻿@model Assessment.Models.ProjectVeiwModel
+
+@{
+    ViewData["Title"] = "Create";
+}
+
+@if (Model.ProjectItem.Id <= 0)
+{
+    <h2>Create</h2>
+}
+else
+{
+    <h2>Edit</h2>
+}
+
+<h4>Project</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="CreateEdit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            @Html.HiddenFor(model => model.ProjectItem.Id)
+            <div class="form-group">
+                <label asp-for="@Model.ProjectItem.Name" class="control-label"></label>
+                <input asp-for="@Model.ProjectItem.Name" class="form-control" />
+                <span asp-validation-for="@Model.ProjectItem.Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label class="control-label">Start Date</label>
+                <input asp-for="@Model.ProjectItem.StartDate" class="form-control" type="date" />
+                <span asp-validation-for="@Model.ProjectItem.StartDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ProjectItem.PlannedEndDate" class="control-label"></label>
+                <input asp-for="@Model.ProjectItem.PlannedEndDate" class="form-control" type="date" />
+                <span asp-validation-for="@Model.ProjectItem.PlannedEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ProjectItem.ActualEndDate" class="control-label"></label>
+                <input asp-for="@Model.ProjectItem.ActualEndDate" class="form-control" type="date" />
+                <span asp-validation-for="@Model.ProjectItem.ActualEndDate" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.ProjectItem.ContactName" class="control-label"></label>
+                @Html.DropDownListFor(model => model.ProjectItem.EmployeeId, Model.Employees, new { @class="form-control"})
+                @*<label asp-for="ContactName" class="control-label"></label>
+                    <input asp-for="ContactName" class="form-control" />
+                    <span asp-validation-for="ContactName" class="text-danger"></span>*@
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-default" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

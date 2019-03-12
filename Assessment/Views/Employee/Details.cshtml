@@ -1,0 +1,83 @@
+﻿@model Assessment.Models.EmployeeVeiwModel
+
+@{
+    ViewData["Title"] = "Details";
+}
+
+
+<div>
+    <h2>Employee Details</h2>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.FirstName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.FirstName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.LastName)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.LastName)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.PhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.PhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.Fax)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.Fax)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.WorkEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.WorkEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.HomeEmail)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.HomeEmail)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.CellPhoneNumber)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.CellPhoneNumber)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.Department)
+        </dt>
+        <dd>
+            @Html.DisplayFor(model => model.EmployeeItem.Department)
+        </dd>
+        <dt>
+            @Html.DisplayNameFor(model => model.EmployeeItem.ProjectIds)
+        </dt>
+        @if (!string.IsNullOrEmpty(Model.EmployeeItem.ProjectIds))
+        {
+
+            <dd>
+                <ul class="list-unstyled">
+                    @foreach (var projectId in Model.EmployeeProjectIds)
+                    {
+                        var project = Model.AllProjects.SingleOrDefault(x => x.Value == projectId.ToString());
+                        <li>@Html.ActionLink(project.Text, "Details", "Project", new { id = project.Value})</li>
+                    }
+                </ul>
+            </dd>
+
+        }
+    </dl>
+</div>
+<br/>
+<div>
+    @Html.ActionLink("Edit", "Edit", new { id = Model.EmployeeItem.Id} ) |
+    <a asp-action="Index">Back to List</a>
+</div>
